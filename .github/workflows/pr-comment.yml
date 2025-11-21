@@ -1,0 +1,25 @@
+name: PR Auto Comment
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  comment:
+    name: Add welcome comment
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write   # nötig, damit die Action kommentieren darf:contentReference[oaicite:13]{index=13}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          message: |
+            Danke fürs Öffnen dieses Pull Requests! 🚀  
+            Bitte achte darauf, dass Linting, Formatierung und Tests grün sind, bevor du mergst.
